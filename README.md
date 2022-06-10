@@ -13,15 +13,17 @@ pip install reportlab
 
 ## Usage
 
-The project have a config.yaml file where you will enter the name of the event, input file, background image and date of the event.
+The project have a config.yaml file where you will enter the name of the event, cleaner usage, input file, background image and date of the event.
 
 ```yaml
-event_name: Teste
+event_name: name
 input_name: input.csv
 date: 20/01/2022
 background_image: background.png
+cleaner: true
+cleaner_hours: [1, 2]
 ```
-The input file must contain two columns, 'NAME' and 'HOURS' and be separate by commas.
+The input file must contain two columns, 'NAME' and 'HOURS' and be separate by commas. Or you can use the cleaner by setting it to true ,listing the hours of each event [1,2,3] and then putting all the CSVs in the directory 'inputToClean'.
 
 Run the code in the terminal or in the IDE. 
 
