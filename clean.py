@@ -24,17 +24,17 @@ def readYAML(file_path):
 
 def cleanCert(hours):
     config_file = readYAML('config.yaml')
-    input_name = config_file['input_name']
     output = pd.DataFrame(columns=['NAME', 'HOURS'])
-    output.to_csv(input_name, index=False)
-    csvs = getNameCsv('csv')
+    output.to_csv(config_file['input_name'], index=False)
+    csvs = getNameCsv('inputToClean')
     csvs.sort()
+
     try:
         for csv, hour in zip(csvs, hours):
             print(csv)
             print(hour)
-            df2 = pd.read_csv('output.csv', sep=',')
-            p = Path('csv/' + csv)
+            df2 = pd.read_csv(config_file['input_name'], sep=',')
+            p = Path('inputToClean/' + csv)
             df = pd.read_csv(p, sep=',')
             try:
                 df['Nome'] = df['Nome'] + ' ' + df['Sobrenome']
@@ -47,7 +47,7 @@ def cleanCert(hours):
                 df = df.merge(df2, on='NAME', how='outer').fillna(0)
                 df['HOURS'] = df['HOURS_x'] + df['HOURS_y']
                 df.drop(columns=['HOURS_x', 'HOURS_y'], inplace=True)
-                df.to_csv(input_name, index=False)
+                df.to_csv(config_file['input_name'], index=False)
             except:
                 print("Unable to clean %s", csv)
     except:
@@ -55,5 +55,5 @@ def cleanCert(hours):
 
 
 if __name__ == '__main__':
-    config_file = readYAML('config.yaml')
-    cleanCert(config_file['cleaner_hours'])
+
+    cleanCert([1, 2, 1, 2])
